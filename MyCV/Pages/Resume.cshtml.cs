@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using MyCV.Data.Entities;
 using MyCV.Services;
 
 namespace MyCV.Pages
@@ -13,7 +14,7 @@ namespace MyCV.Pages
             _resumeService = resumeService;
         }
 
-        public Models.ResumeModel Resume { get; set; }
+        public ResumeEntity Resume { get; set; }
 
         public void OnGet()
         {

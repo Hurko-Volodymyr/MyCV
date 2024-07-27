@@ -18,7 +18,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Repositories\" />
+    <Folder Include="Abstractions\Services\" />
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

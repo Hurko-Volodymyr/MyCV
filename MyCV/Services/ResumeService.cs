@@ -1,25 +1,25 @@
-﻿using MyCV.Models;
+﻿using MyCV.Data.Entities;
 
 namespace MyCV.Services
 {
     public interface IResumeService
     {
-        ResumeModel GetResume();
+        ResumeEntity GetResume();
     }
 
     public class ResumeService : IResumeService
     {
-        public ResumeModel GetResume()
+        public ResumeEntity GetResume()
         {
-            return new ResumeModel
+            return new ResumeEntity
             {
                 FullName = "Ваше Ім'я",
                 Contact = "ваш.email@example.com",
                 Summary = "Короткий опис вашого професійного досвіду та цілей.",
                 Skills = new List<string> { "C#", "ASP.NET Core", "HTML", "CSS", "JavaScript" },
-                WorkExperiences = new List<WorkExperienceModel>
+                WorkExperiences = new List<WorkExperienceEntity>
                 {
-                    new WorkExperienceModel
+                    new WorkExperienceEntity
                     {
                         Company = "Назва Компанії",
                         Position = "Ваша Посада",

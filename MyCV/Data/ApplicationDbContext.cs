@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using MyCV.Models;
+using MyCV.Data.Entities;
 
 namespace MyCV.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        public DbSet<ResumeModel> Resumes { get; set; }
-        public DbSet<EducationModel> Educations { get; set; }
-        public DbSet<WorkExperienceModel> Experiences { get; set; }
+        public DbSet<ResumeEntity> Resumes { get; set; }
+        public DbSet<EducationEntity> Educations { get; set; }
+        public DbSet<WorkExperienceEntity> Experiences { get; set; }
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -18,12 +18,12 @@ namespace MyCV.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<ResumeModel>()
+            modelBuilder.Entity<ResumeEntity>()
                 .HasMany(r => r.Education)
                 .WithOne()
                 .HasForeignKey("ResumeId");
 
-            modelBuilder.Entity<ResumeModel>()
+            modelBuilder.Entity<ResumeEntity>()
                 .HasMany(r => r.WorkExperiences)
                 .WithOne()
                 .HasForeignKey("ResumeId");
