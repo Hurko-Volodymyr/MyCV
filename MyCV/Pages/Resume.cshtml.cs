@@ -1,24 +1,25 @@
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using MyCV.Data.Entities;
-using MyCV.Services;
+using MyCV.Abstractions.Services;
+using MyCV.Models;
 
 namespace MyCV.Pages
 {
-    public class ResumeModel : PageModel
+    public class ResumePageModel : PageModel
     {
         private readonly IResumeService _resumeService;
 
-        public ResumeModel(IResumeService resumeService)
+        public ResumePageModel(IResumeService resumeService)
         {
             _resumeService = resumeService;
         }
 
-        public ResumeEntity Resume { get; set; }
+        public List<ResumeModel> Resumes { get; set; }
+        public ResumeModel Resume { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Resume = _resumeService.GetResume();
+            Resumes = await _resumeService.GetAllResumesAsync();
+            Resume = Resumes.FirstOrDefault();
         }
     }
 }

@@ -19,14 +19,23 @@ namespace MyCV.Data
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ResumeEntity>()
-                .HasMany(r => r.Education)
-                .WithOne()
-                .HasForeignKey("ResumeId");
+                .HasKey(r => r.ResumeId);
 
-            modelBuilder.Entity<ResumeEntity>()
-                .HasMany(r => r.WorkExperiences)
-                .WithOne()
-                .HasForeignKey("ResumeId");
+            modelBuilder.Entity<EducationEntity>()
+                .HasKey(e => e.EducationId);
+
+            modelBuilder.Entity<EducationEntity>()
+                .HasOne(e => e.Resume)
+                .WithMany(r => r.Education)
+                .HasForeignKey(e => e.ResumeId);
+
+            modelBuilder.Entity<WorkExperienceEntity>()
+                .HasKey(w => w.WorkId);
+
+            modelBuilder.Entity<WorkExperienceEntity>()
+                .HasOne(w => w.Resume)
+                .WithMany(r => r.WorkExperiences)
+                .HasForeignKey(w => w.ResumeId);
         }
     }
 }

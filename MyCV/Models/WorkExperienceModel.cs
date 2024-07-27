@@ -1,14 +1,11 @@
-﻿namespace MyCV.Data.Entities
+﻿namespace MyCV.Models
 {
-    public class WorkExperienceEntity
+    public class WorkExperienceModel
     {
-        public string WorkId { get; set; }
-        public string ResumeId { get; set; }
         public string Company { get; set; }
         public string Position { get; set; }
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
         public string Description { get; set; }
-        public ResumeEntity Resume { get; set; }
     }
 }

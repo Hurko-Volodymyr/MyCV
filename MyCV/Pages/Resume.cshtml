@@ -1,5 +1,5 @@
 ﻿@page
-@model ResumeModel
+@model ResumePageModel
 @{
     ViewData["Title"] = "Моє резюме";
 }
@@ -26,5 +26,15 @@
         <p>@experience.Company</p>
         <p>@experience.StartDate.ToString("MMM yyyy") - @(experience.EndDate?.ToString("MMM yyyy") ?? "Теперішній час")</p>
         <p>@experience.Description</p>
+    </div>
+}
+<h2>Освіта</h2>
+@foreach (var education in Model.Resume.Education)
+{
+    <div>
+        <h3>@education.Name</h3>
+        <p>@education.Degree</p>
+        <p>@education.StartDate.ToString("MMM yyyy") - @(education.EndDate?.ToString("MMM yyyy") ?? "Теперішній час")</p>
+        <p>@education.Description</p>
     </div>
 }

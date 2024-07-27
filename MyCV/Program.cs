@@ -1,6 +1,9 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using MyCV.Abstractions.Repositories;
+using MyCV.Abstractions.Services;
 using MyCV.Data;
+using MyCV.Data.Repositories;
 using MyCV.Services;
 
 namespace MyCV
@@ -14,7 +17,10 @@ namespace MyCV
             // Add services to the container.
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(connectionString));
+                options.UseNpgsql(connectionString));
+            builder.Services.AddScoped<IResumeRepository, ResumeRepository>();
+            builder.Services.AddScoped<IEducationRepository, EducationRepository>();
+            builder.Services.AddScoped<IWorkRepository, WorkRepository>();
             builder.Services.AddScoped<IResumeService, ResumeService>();
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
@@ -44,6 +50,12 @@ namespace MyCV
             app.UseAuthorization();
 
             app.MapRazorPages();
+
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+                DataSeeder.Seed(services);
+            }
 
             app.Run();
         }
